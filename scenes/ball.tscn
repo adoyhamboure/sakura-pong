@@ -1,0 +1,124 @@
+[gd_scene load_steps=15 format=3 uid="uid://urpbfj8gexb5"]
+
+[ext_resource type="Script" path="res://scenes/ball.gd" id="1_3j4eu"]
+[ext_resource type="Texture2D" uid="uid://dr3lfu5a6qmb4" path="res://assets/art/ball_sakura-Sheet.png" id="2_3ppgr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gebf4"]
+atlas = ExtResource("2_3ppgr")
+region = Rect2(0, 0, 620, 620)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2tgbu"]
+atlas = ExtResource("2_3ppgr")
+region = Rect2(0, 0, 620, 620)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c0bo4"]
+atlas = ExtResource("2_3ppgr")
+region = Rect2(1860, 0, 620, 620)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20m32"]
+atlas = ExtResource("2_3ppgr")
+region = Rect2(1240, 0, 620, 620)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3caic"]
+atlas = ExtResource("2_3ppgr")
+region = Rect2(620, 0, 620, 620)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sw5om"]
+atlas = ExtResource("2_3ppgr")
+region = Rect2(0, 0, 620, 620)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4wk6"]
+atlas = ExtResource("2_3ppgr")
+region = Rect2(620, 0, 620, 620)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y42be"]
+atlas = ExtResource("2_3ppgr")
+region = Rect2(1240, 0, 620, 620)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uv38"]
+atlas = ExtResource("2_3ppgr")
+region = Rect2(1860, 0, 620, 620)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1mh6y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gebf4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2tgbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c0bo4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20m32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3caic")
+}],
+"loop": true,
+"name": &"rotating_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sw5om")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4wk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y42be")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8uv38")
+}],
+"loop": true,
+"name": &"rotating_right",
+"speed": 60.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o0eio"]
+radius = 21.0
+height = 42.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_o7b4r"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[node name="Ball" type="CharacterBody2D"]
+script = ExtResource("1_3j4eu")
+
+[node name="BallStartPosition" type="Marker2D" parent="."]
+position = Vector2(150, 540)
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.08, 0.08)
+sprite_frames = SubResource("SpriteFrames_1mh6y")
+speed_scale = 0.8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_o0eio")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_o7b4r")
+amount = 64
+lifetime = 2.0
+speed_scale = 0.5
+emission_shape = 4
+emission_points = PackedVector2Array()
+emission_colors = PackedColorArray()
+spread = 0.0
+initial_velocity_max = 400.0
+scale_amount_min = 0.0
+scale_amount_max = 3.0
+anim_speed_min = 12.08
+anim_speed_max = 12.08

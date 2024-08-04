@@ -1,0 +1,464 @@
+[gd_scene load_steps=23 format=3 uid="uid://cp5jqcb6p8jdg"]
+
+[ext_resource type="FontFile" uid="uid://cetbfybj34y56" path="res://assets/fonts/DePixelHalbfett.ttf" id="1_5hlj3"]
+[ext_resource type="Script" path="res://scenes/game_hud.gd" id="1_oin5r"]
+
+[sub_resource type="Animation" id="Animation_nbcsc"]
+resource_name = "color_change"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.756863, 0.313726, 0.886275, 0.156863), Color(0.0784314, 0.627451, 0.584314, 0.156863), Color(0.45098, 0.482353, 0.960784, 0.156863), Color(0.156863, 0.494118, 0.223529, 0.156863), Color(0.580392, 0.517647, 0.0666667, 0.156863), Color(0.580392, 0.517647, 0.0666667, 0.156863), Color(0, 0.516286, 0.92374, 0.156863), Color(0.932616, 0, 0.427754, 0.156863), Color(0.91195, 0.246025, 4.79382e-05, 0.156863), Color(0.984314, 0.0666667, 0.0666667, 0.156863), Color(0.756863, 0.313726, 0.886275, 0.156863)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s4fy0"]
+_data = {
+"color_change": SubResource("Animation_nbcsc")
+}
+
+[sub_resource type="Animation" id="Animation_gjblm"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_54byr"]
+resource_name = "bounce"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.4, 1.4), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_10rch"]
+resource_name = "move_player"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(810, -0.25, 0, 0.25, 0, 808, -0.25, 0, 0.25, 0, 810, -0.25, 0, 0.25, 0, 812, -0.25, 0, 0.25, 0, 810, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(60, -0.25, 0, 0.25, 0, 62, -0.25, 0, 0.25, 0, 60, -0.25, 0, 0.25, 0, 58, -0.25, 0, 0.25, 0, 60, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cdntt"]
+_data = {
+"RESET": SubResource("Animation_gjblm"),
+"bounce": SubResource("Animation_54byr"),
+"move_player": SubResource("Animation_10rch")
+}
+
+[sub_resource type="Animation" id="Animation_r67jp"]
+resource_name = "move_player"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(808, 0, 0, 0, 0, 812, 0, 0, 0, 0, 812, 0, 0, 0, 0, 808, 0, 0, 0, 0, 808, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.75, 1.5, 2.25, 3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(58, 0, 0, 0, 0, 58, 0, 0, 0, 0, 62, 0, 0, 0, 0, 62, 0, 0, 0, 0, 58, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.75, 1.5, 2.25, 3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_scb50"]
+_data = {
+"move_player": SubResource("Animation_r67jp")
+}
+
+[sub_resource type="Animation" id="Animation_hm4aa"]
+resource_name = "move_cpu"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(1062, 0, 0, 0, 0, 1058, 0, 0, 0, 0, 1060, 0, 0, 0, 0, 1062, 0, 0, 0, 0, 1062, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.75, 1.5, 2.25, 3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(62, 0, 0, 0, 0, 62, 0, 0, 0, 0, 58, 0, 0, 0, 0, 58, 0, 0, 0, 0, 62, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.75, 1.5, 2.25, 3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1ex2o"]
+_data = {
+"move_cpu": SubResource("Animation_hm4aa")
+}
+
+[sub_resource type="Animation" id="Animation_x4j0p"]
+resource_name = "movement"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(940, 50), Vector2(943, 56), Vector2(946, 56), Vector2(937, 50), Vector2(934, 46), Vector2(940, 50)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_36n4e"]
+_data = {
+"movement": SubResource("Animation_x4j0p")
+}
+
+[sub_resource type="Animation" id="Animation_lhn6o"]
+resource_name = "scale"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(4, 4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8esfg"]
+_data = {
+"scale": SubResource("Animation_lhn6o")
+}
+
+[sub_resource type="Animation" id="Animation_yu6a2"]
+resource_name = "buzz"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EndLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.2001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(792.5, 499.5), Vector2(794, 500), Vector2(791, 499), Vector2(793, 501), Vector2(792.5, 499.5), Vector2(792.5, 499.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("EndLabel:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0174533, 0.0, -0.0174533, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x7rlq"]
+_data = {
+"buzz": SubResource("Animation_yu6a2")
+}
+
+[sub_resource type="Animation" id="Animation_wvtob"]
+resource_name = "slow_bounce"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_34efq"]
+_data = {
+"slow_bounce": SubResource("Animation_wvtob")
+}
+
+[sub_resource type="Animation" id="Animation_y7jbn"]
+resource_name = "bounce"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vm3tj"]
+_data = {
+"bounce": SubResource("Animation_y7jbn")
+}
+
+[node name="GameHUD" type="CanvasLayer"]
+script = ExtResource("1_oin5r")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.756863, 0.313726, 0.886275, 0.156863)
+
+[node name="ColorAnimPlayer" type="AnimationPlayer" parent="ColorRect"]
+libraries = {
+"": SubResource("AnimationLibrary_s4fy0")
+}
+
+[node name="ScorePlayer" type="Label" parent="."]
+offset_left = 808.0
+offset_top = 58.0
+offset_right = 866.0
+offset_bottom = 139.001
+pivot_offset = Vector2(27, 38)
+theme_override_fonts/font = ExtResource("1_5hlj3")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScorePlayer"]
+process_mode = 3
+libraries = {
+"": SubResource("AnimationLibrary_cdntt")
+}
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="ScorePlayer"]
+libraries = {
+"": SubResource("AnimationLibrary_scb50")
+}
+
+[node name="ScoreCpu" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 27942.0
+offset_top = 62.0
+offset_right = 28000.0
+offset_bottom = 143.0
+grow_horizontal = 2
+pivot_offset = Vector2(26, 39)
+theme_override_fonts/font = ExtResource("1_5hlj3")
+theme_override_font_sizes/font_size = 64
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScoreCpu"]
+process_mode = 3
+libraries = {
+"": SubResource("AnimationLibrary_cdntt")
+}
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="ScoreCpu"]
+libraries = {
+"": SubResource("AnimationLibrary_1ex2o")
+}
+
+[node name="Separator" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 50.0
+offset_right = 20.0
+offset_bottom = 131.0
+grow_horizontal = 2
+pivot_offset = Vector2(16, 47)
+theme_override_fonts/font = ExtResource("1_5hlj3")
+theme_override_font_sizes/font_size = 64
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Separator"]
+libraries = {
+"": SubResource("AnimationLibrary_36n4e")
+}
+speed_scale = 0.2
+
+[node name="BounceTimer" type="Timer" parent="."]
+wait_time = 0.4
+
+[node name="StartDropTimer" type="Timer" parent="."]
+wait_time = 25.2
+one_shot = true
+
+[node name="EndDropTimer" type="Timer" parent="."]
+wait_time = 23.8
+one_shot = true
+
+[node name="EndLabel" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -167.835
+offset_top = -39.8347
+offset_right = 167.291
+offset_bottom = 41.1653
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.0101697
+pivot_offset = Vector2(164.5, 39.5)
+theme_override_fonts/font = ExtResource("1_5hlj3")
+theme_override_font_sizes/font_size = 64
+text = "victory"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EndLabelPlayer" type="AnimationPlayer" parent="EndLabel"]
+libraries = {
+"": SubResource("AnimationLibrary_8esfg")
+}
+
+[node name="EndLabelPlayer2" type="AnimationPlayer" parent="EndLabel"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_x7rlq")
+}
+
+[node name="PressSpace" type="Label" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -207.0
+offset_top = -331.0
+offset_right = 207.0
+offset_bottom = -300.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.09288, 1.09288)
+pivot_offset = Vector2(206, 16)
+theme_override_fonts/font = ExtResource("1_5hlj3")
+theme_override_font_sizes/font_size = 24
+text = "press space to continue"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PressSpace"]
+libraries = {
+"": SubResource("AnimationLibrary_34efq")
+}
+
+[node name="TooFast" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_5hlj3")
+theme_override_font_sizes/font_size = 64
+text = "too fast !"
+horizontal_alignment = 1
+
+[node name="TooFastTimer" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+
+[node name="WindIncoming" type="Label" parent="."]
+offset_left = 564.0
+offset_top = 261.0
+offset_right = 948.0
+offset_bottom = 302.0
+scale = Vector2(1.05623, 1.05623)
+pivot_offset = Vector2(188.822, 21.5238)
+theme_override_colors/font_color = Color(1, 0.407246, 0.338652, 1)
+theme_override_fonts/font = ExtResource("1_5hlj3")
+theme_override_font_sizes/font_size = 32
+text = "wind incoming !!!"
+metadata/_edit_group_ = true
+
+[node name="WindAnimPlayer" type="AnimationPlayer" parent="WindIncoming"]
+libraries = {
+"": SubResource("AnimationLibrary_vm3tj")
+}
+
+[node name="WindTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="BounceTimer" to="." method="_on_bounce_timer_timeout"]
+[connection signal="timeout" from="StartDropTimer" to="." method="_on_start_drop_timer_timeout"]
+[connection signal="timeout" from="EndDropTimer" to="." method="_on_end_drop_timer_timeout"]
+[connection signal="timeout" from="TooFastTimer" to="." method="_on_too_fast_timer_timeout"]
+[connection signal="timeout" from="WindTimer" to="." method="_on_wind_timer_timeout"]

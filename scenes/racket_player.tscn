@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://g0bbg0cphtwl"]
+
+[ext_resource type="Texture2D" uid="uid://cbu4uk3uw03fb" path="res://assets/art/racket.png" id="1_5uwj8"]
+[ext_resource type="Script" path="res://scenes/racket_player.gd" id="1_kywlt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ulqav"]
+size = Vector2(20, 160)
+
+[node name="Racket(Player)" type="StaticBody2D"]
+script = ExtResource("1_kywlt")
+speed = 800
+
+[node name="RacketSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_5uwj8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ulqav")
+
+[node name="StartPositionPlayer" type="Marker2D" parent="."]
+position = Vector2(100, 540)

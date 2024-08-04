@@ -1,0 +1,243 @@
+[gd_scene load_steps=13 format=3 uid="uid://cy7v5ljomwnh7"]
+
+[ext_resource type="Script" path="res://scenes/main_menu_hud.gd" id="1_1woqv"]
+[ext_resource type="FontFile" uid="uid://cetbfybj34y56" path="res://assets/fonts/DePixelHalbfett.ttf" id="1_avxj8"]
+[ext_resource type="Texture2D" uid="uid://e7q28afy03o1" path="res://assets/art/terrain.png" id="2_i1utb"]
+[ext_resource type="Texture2D" uid="uid://bn8wjoswoctq2" path="res://assets/art/sakuraflower.png" id="4_n2kn7"]
+[ext_resource type="FontFile" uid="uid://cdhwicg75vpwh" path="res://assets/fonts/Kawaii eyes.ttf" id="5_b2gy6"]
+
+[sub_resource type="Animation" id="Animation_7ipq4"]
+resource_name = "bounce"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.05, 1.05), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3satx"]
+_data = {
+"bounce": SubResource("Animation_7ipq4")
+}
+
+[sub_resource type="Animation" id="Animation_g8p6d"]
+resource_name = "bounce"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0349066, -0.0349066, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xvnv7"]
+_data = {
+"bounce": SubResource("Animation_g8p6d")
+}
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0lb01"]
+a = Vector2(-24, -25)
+b = Vector2(1992, -22)
+
+[sub_resource type="Animation" id="Animation_xrvy6"]
+resource_name = "bounce"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.8, 1.8), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_41a43"]
+_data = {
+"bounce": SubResource("Animation_xrvy6")
+}
+
+[node name="MainMenuHUD" type="CanvasLayer"]
+script = ExtResource("1_1woqv")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_i1utb")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-82, -102)
+amount = 32
+lifetime = 2.0
+speed_scale = 0.1
+texture = ExtResource("4_n2kn7")
+gravity = Vector2(600, 900)
+initial_velocity_max = 1000.0
+angle_min = -226.9
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="CPUParticles2D"]
+amount = 32
+lifetime = 2.0
+speed_scale = 0.5
+gravity = Vector2(600, 980)
+initial_velocity_max = 1000.0
+scale_amount_max = 10.43
+color = Color(1, 0.588235, 1, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 250.0
+offset_top = 600.0
+offset_right = 550.0
+offset_bottom = 782.0
+pivot_offset = Vector2(139.807, 87.9651)
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_avxj8")
+theme_override_font_sizes/font_size = 64
+text = "start"
+flat = true
+
+[node name="OptionButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_avxj8")
+theme_override_font_sizes/font_size = 64
+text = "options"
+flat = true
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_avxj8")
+theme_override_font_sizes/font_size = 64
+text = "quit
+"
+flat = true
+
+[node name="BoxAnimPlayer" type="AnimationPlayer" parent="VBoxContainer"]
+libraries = {
+"": SubResource("AnimationLibrary_3satx")
+}
+
+[node name="Title" type="Label" parent="."]
+offset_left = 616.0
+offset_top = 167.0
+offset_right = 1763.0
+offset_bottom = 328.0
+rotation = 0.0872665
+pivot_offset = Vector2(571, 90)
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("1_avxj8")
+theme_override_font_sizes/font_size = 128
+text = "sakura pong"
+
+[node name="TitleAnimPlayer" type="AnimationPlayer" parent="Title"]
+libraries = {
+"": SubResource("AnimationLibrary_xvnv7")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("SegmentShape2D_0lb01")
+
+[node name="Eyes" type="Label" parent="."]
+offset_left = 1132.0
+offset_top = 196.0
+offset_right = 1433.0
+offset_bottom = 769.0
+rotation = -0.413643
+pivot_offset = Vector2(139, 457)
+mouse_filter = 0
+theme_override_fonts/font = ExtResource("5_b2gy6")
+theme_override_font_sizes/font_size = 512
+text = "n"
+
+[node name="EyesAnimPlayer" type="AnimationPlayer" parent="Eyes"]
+libraries = {
+"": SubResource("AnimationLibrary_41a43")
+}
+
+[node name="Options" type="VBoxContainer" parent="."]
+offset_left = 250.0
+offset_top = 1200.0
+offset_right = 290.0
+offset_bottom = 1240.0
+metadata/_edit_group_ = true
+
+[node name="OptionLabel" type="Label" parent="Options"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_avxj8")
+theme_override_font_sizes/font_size = 64
+text = "options
+
+"
+
+[node name="VolumeLabel" type="Label" parent="Options"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_avxj8")
+theme_override_font_sizes/font_size = 32
+text = "volume"
+
+[node name="VolumeSlider" type="HSlider" parent="Options"]
+layout_mode = 2
+tooltip_text = "change volume with that slider"
+max_value = 40.0
+
+[node name="GoBackButton" type="Button" parent="Options"]
+layout_mode = 2
+focus_mode = 0
+theme_override_fonts/font = ExtResource("1_avxj8")
+theme_override_font_sizes/font_size = 32
+text = "go back"
+
+[connection signal="mouse_entered" from="VBoxContainer/StartButton" to="." method="_on_start_button_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/StartButton" to="." method="_reset_eyes"]
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/OptionButton" to="." method="_on_option_button_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/OptionButton" to="." method="_reset_eyes"]
+[connection signal="pressed" from="VBoxContainer/OptionButton" to="." method="_on_option_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/QuitButton" to="." method="_reset_eyes"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="mouse_entered" from="Title" to="." method="_on_title_mouse_entered"]
+[connection signal="mouse_exited" from="Title" to="." method="_reset_eyes"]
+[connection signal="mouse_entered" from="Eyes" to="." method="_on_eyes_mouse_entered"]
+[connection signal="mouse_exited" from="Eyes" to="." method="_reset_eyes"]
+[connection signal="value_changed" from="Options/VolumeSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="Options/GoBackButton" to="." method="_on_go_back_button_pressed"]

@@ -1,0 +1,85 @@
+[gd_scene load_steps=11 format=3 uid="uid://m8pj1mtmri4r"]
+
+[ext_resource type="PackedScene" uid="uid://g0bbg0cphtwl" path="res://scenes/racket_player.tscn" id="1_24y0e"]
+[ext_resource type="PackedScene" uid="uid://cp5jqcb6p8jdg" path="res://scenes/hud.tscn" id="1_fowq2"]
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_m5tnp"]
+[ext_resource type="PackedScene" uid="uid://ctotp3x4vwmr1" path="res://scenes/racket_cpu.tscn" id="2_264i1"]
+[ext_resource type="PackedScene" uid="uid://urpbfj8gexb5" path="res://scenes/ball.tscn" id="2_wttbi"]
+[ext_resource type="PackedScene" uid="uid://b542caanfm35v" path="res://scenes/arrow.tscn" id="6_rgsod"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_houup"]
+a = Vector2(956, 9)
+b = Vector2(-958, 9)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_cxpr0"]
+a = Vector2(-957.75, -13)
+b = Vector2(957.25, -13)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_r4nrh"]
+a = Vector2(6, -653)
+b = Vector2(6, 665)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_nqj0s"]
+a = Vector2(-6, -829.5)
+b = Vector2(-6, 634.5)
+
+[node name="Main" type="Node"]
+script = ExtResource("1_m5tnp")
+
+[node name="HUD" parent="." instance=ExtResource("1_fowq2")]
+
+[node name="UpWall" type="Area2D" parent="."]
+position = Vector2(0, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpWall"]
+position = Vector2(961, -7)
+shape = SubResource("SegmentShape2D_houup")
+
+[node name="DownWall" type="Area2D" parent="."]
+position = Vector2(0, 3)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DownWall"]
+position = Vector2(959.75, 1090)
+shape = SubResource("SegmentShape2D_cxpr0")
+
+[node name="LeftWall" type="Area2D" parent="."]
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(-6, 535)
+shape = SubResource("SegmentShape2D_r4nrh")
+
+[node name="RightWall" type="Area2D" parent="."]
+position = Vector2(1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(1925, 553.5)
+shape = SubResource("SegmentShape2D_nqj0s")
+metadata/_edit_group_ = true
+
+[node name="Player1" parent="." instance=ExtResource("1_24y0e")]
+position = Vector2(96, 543)
+
+[node name="Player(CPU)" parent="." instance=ExtResource("2_264i1")]
+position = Vector2(1860, 527)
+
+[node name="Ball" parent="." instance=ExtResource("2_wttbi")]
+position = Vector2(370, 376)
+
+[node name="Arrow" parent="." instance=ExtResource("6_rgsod")]
+
+[connection signal="body_entered" from="UpWall" to="Ball" method="_on_up_wall_body_entered"]
+[connection signal="body_entered" from="DownWall" to="Ball" method="_on_down_wall_body_entered"]
+[connection signal="body_exited" from="LeftWall" to="Player1" method="_on_left_wall_body_exited"]
+[connection signal="body_exited" from="LeftWall" to="Player(CPU)" method="_on_left_wall_body_exited"]
+[connection signal="body_exited" from="LeftWall" to="Ball" method="_on_left_wall_body_exited"]
+[connection signal="body_exited" from="LeftWall" to="Arrow" method="_on_left_wall_body_exited"]
+[connection signal="body_exited" from="RightWall" to="Player1" method="_on_right_wall_body_exited"]
+[connection signal="body_exited" from="RightWall" to="Player(CPU)" method="_on_right_wall_body_exited"]
+[connection signal="body_exited" from="RightWall" to="Ball" method="_on_right_wall_body_exited"]
+[connection signal="body_exited" from="RightWall" to="Arrow" method="_on_right_wall_body_exited"]
+[connection signal="ball_exited_left" from="Ball" to="HUD" method="_on_ball_ball_exited_left"]
+[connection signal="ball_exited_left" from="Ball" to="Player1" method="_on_ball_ball_exited_left"]
+[connection signal="ball_exited_right" from="Ball" to="HUD" method="_on_ball_ball_exited_right"]
+[connection signal="launch_angle" from="Arrow" to="Ball" method="_on_arrow_launch_angle"]

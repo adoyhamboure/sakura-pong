@@ -1,0 +1,33 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://cdhwicg75vpwh"
+path="res://.godot/imported/Kawaii eyes.ttf-8aaf4bc75c11c5e57a28777465306bdc.fontdata"
+
+[deps]
+
+source_file="res://assets/fonts/Kawaii eyes.ttf"
+dest_files=["res://.godot/imported/Kawaii eyes.ttf-8aaf4bc75c11c5e57a28777465306bdc.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}
